@@ -1,23 +1,18 @@
 import { Router } from "express"
+import * as ProductController from "../controllers/product.controller.js";
 
 const router = Router();
 
-router.get("/products", ( req, res)=>{
-  let limit = parseInt(req.query.limit)
-  if(!isNaN(limit) && limit > 0){
-    return res.json(products.slice(0, limit));
-  }
-  res.json(products);
-});
+router.get("/", ProductController.getProducts);
 
-router.get("/products/:pid", (req, res)=>{
-  const productId = parseInt(req.params.pid);
-  const product = products.find((product)=> product.id === productId);
-  if(product){
-    return res.json(product);
-  }else{
-    res.status(404).json({message: "Producto no encontrado"});
-  }
-})
+router.get("/:pid", ProductController.getProductsById);
 
+router.post("/", ProductController.createProduct);
 
+router.put("/:pid", ProductController.updateProduct);
+
+router.patch("/:pid", ProductController.updateProduct);
+
+router.delete("/:pid", ProductController.deleteProduct);
+
+export default router;

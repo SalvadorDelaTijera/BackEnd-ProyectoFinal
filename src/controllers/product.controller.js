@@ -1,0 +1,73 @@
+import * as ProductService from "../services/product.service.js";
+
+export const getProducts = async (req, res) => {
+  try {
+    const products = await ProductService.readProducts();
+
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const createProduct = async (req, res) => {
+  const { body } = req;
+
+  try {
+    await ProductService.createProduct(boidy);
+    res.status(201).json({ message: "Se creo exitosamente el producto." });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+export const updateProduct = async (req, res) => {
+  const { pid } = req.params;
+  const { body } = req;
+
+  const productId = parseInt(pid);
+
+  if (isNaN(productId) || productId < 1) {
+    return res.status(400).json({ error: " Debe proporcionar un id valido de producto." });
+  }
+
+  try {
+    await ProductService.updateProduct(productId, body);
+  }catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+export const getProductsById = async (req, res) => {
+  const { pid } = req.params;
+  const productId = parseInt(pid);
+
+  if (isNaN(productId) || productId < 1) {
+    return res.status(400).json({ error: "Debe proporcionar un id valido de productos" });
+  }
+
+  try {
+    const product = await ProductService.readProductById(productId);
+
+    res.status(200).json({ error: error.message });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+export const deleteProduct = async (req, res) => {
+  const { pid } = req.params;
+  
+  const productId = parseInt (pid);
+
+  if (isNaN(productId) || productId < 1) {
+    return res.status(400).json({ error: "Debe proporcionar un id valido de producto." });
+  }
+
+  try {
+    await ProductService.deleteProduct(productId);
+    res.status(200).json({ message: "Se borro exitosamente el producto. "});
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
