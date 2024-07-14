@@ -1,5 +1,3 @@
-import { parse } from "path";
-
 export default class Product {
 
   constructor(
@@ -21,11 +19,9 @@ export default class Product {
     this.stock = stock;
     this.category = category;
     this.thumbnails = thumbnails;
-
   }
 
   static parse(object) {
-
     if(!object.title || object.title.length === 0) {
       throw new Error("Debes proporcionar un \'title' valido." );
     }
@@ -53,6 +49,17 @@ export default class Product {
     if(!object.category || object.category.length === 0){
       throw new Error("Debes proporcionar un \'category' valido." );
     }
-  };
+
+    return new Product(
+      object.title,
+      object.description,
+      object.code,
+      object.price,
+      object.stock,
+      object.category,
+      object?.status || true,
+      object?.thumbnails || []
+    );
+  }
 };
 
