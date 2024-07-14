@@ -1,7 +1,7 @@
 import { readFile, writeFile } from "node:fs/promises"; // por????
 import Product from "../models/product.model.js";
-export default class ProductManager {
 
+export default class ProductManager {
   static #INITIAL_LAST_ID = 0;
 
   #lastId;
@@ -13,7 +13,6 @@ export default class ProductManager {
   }
 
   //------------------------------- CREAR UN PRODUCTO -----------------------------------
-
   async createProduct(productData) {
     try {
       let retVal;
@@ -25,7 +24,7 @@ export default class ProductManager {
       );
 
       if(existingProduct) {
-        existingProduct.quantity += newProduct.quantity;
+        existingProduct.stock += newProduct.stock;
         retVal = existingProduct;
       }else{
         newProduct.Id = ++this.#lastId;
@@ -43,16 +42,15 @@ export default class ProductManager {
   };
 
 //------------------------------- LEER UN PRODUCTO -----------------------------------
-
-async loadFile() {
+async loadProduct() {
   try {
     const reader = await readFile(this.path, { encoding: "utf-8" });
     if (reader) {
 
       const file = JSON.parse(reader);
 
-      this.#lastId = file.lastId;
-      this.#products = file.products;
+      this.#lastId = product?.lastId || ProductManager.#INITIAL_LAST_ID;
+      this.#products = product?.products || [];
     } else {
       this.#lastId = ProductManager.#INITIAL_LAST_ID;
       this.#products = [];
@@ -67,28 +65,28 @@ async loadFile() {
       console.error(error);
       throw error;
     }
-  }
-}
+  };
+};
 
 //------------------------------- LEER TODOS LOS PRODUCTOS -----------------------------------
-
   async readProducts() {
     try {
       await this.loadFile();
 
       return this.#products;
+
     } catch (error) {
+
       if ((error.code = "ENOENT")) {
         return [];
       } else {
         console.error(error);
         throw error;
       }
-    }
-  }
+    };
+  };
 
  //------------------------------- LEER UN PRODUCTO POR ID -----------------------------------
-
   async readProductById(productId) {
     try {
       await this.loadFile();
@@ -107,24 +105,23 @@ async loadFile() {
   }  
 
 //------------------------------- GUARDAR UN PRODUCTO -----------------------------------
-
-  async saveProduct(products) {
+  async saveProduct() {
     try {
-      const newProducts = products.map((product) => Product.parse(product));
-      const maxId = Math.max(...newProducts.map((product) => product.id));
-      this.#products = [...newProducts];
-      this.#lastId = maxId;
+      const product = {
+        lastId: this.#lastId,
+        products: this.#products,
+      };
 
-      await this.saveFile();
+      const writter = JSON.stringify(file, null, 2);
 
-      return newProducts;
+      await writeFile(this.path, writter, { encoding: "utf-8"});
+    
     } catch (error) {
       console.error(error);
       throw error;
     }
   }    
   //------------------------------- ACTUALIZAR UN PRODUCTO  -----------------------------------
-
     async updateProductById(productId, data) {
       try {
         
@@ -152,13 +149,13 @@ async loadFile() {
         console.error(error);
         throw error;
       }
-    }
+    };
+
     getLastId () {
       return this.this.#lastId;
-    }
+    };
 
 //------------------------------- ELIMINAR UN PRODUCTO  -----------------------------------
-
   async deleteProductById(productId) {
     try {
       await this.loadFile();
@@ -183,5 +180,5 @@ async loadFile() {
       console.error(error);
       throw error;
     }
-  }
-}
+  };
+};

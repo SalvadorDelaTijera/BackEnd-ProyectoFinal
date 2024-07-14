@@ -1,10 +1,10 @@
 import ProductManager from "../repositories/product.repository.js";
 
-const ProductManager = new ProductManager();
+const productManager = new ProductManager();
 
 export const createProduct = async (data) => {
   try {
-    await ProductManager.createProduct(data);
+   return await productManager.createProduct(data);
   } catch (error) {
     throw error;
   }
@@ -12,7 +12,7 @@ export const createProduct = async (data) => {
 
 export const readProducts = async () => {
   try {
-    return await ProductManager.readPorducts();
+    return await productManager.readPorducts();
   } catch (error) {
     throw error;
   }
@@ -20,7 +20,7 @@ export const readProducts = async () => {
 
 export const readProductById = async (productId) => {
   try {
-    return await ProductManager.readProductById(productId);
+    return await productManager.readProductById(productId);
   }catch (error) {
     throw error;
   }
@@ -28,7 +28,7 @@ export const readProductById = async (productId) => {
 
 export const updateProduct = async (productId, data) => {
   try {
-    await ProductManager.updateProduct(productId, data)
+    return await productManager.updateProduct(productId, data)
   }catch(error) {
     throw error;
   }
@@ -36,7 +36,7 @@ export const updateProduct = async (productId, data) => {
 
 export const deleteProduct = async (productId) => {
   try {
-    await ProductManager.deleteProduct(productId);
+    return await productManager.deleteProduct(productId);
   }catch ( error) {
     throw error;
   }

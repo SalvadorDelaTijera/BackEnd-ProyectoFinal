@@ -1,2 +1,11 @@
-.env
+# Node modules folder
 node_modules/
+
+# VS Code folder
+.vscode/
+
+# Environment files
+.env
+.env.dev*
+.env.test*
+.env.prod*

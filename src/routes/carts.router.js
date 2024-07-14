@@ -1,15 +1,18 @@
 import { Router } from "express";
+import * as CartController from  "../controllers/cart.controller.js"
 
 const router = Router();
-// const express = require("express")
 
-router.get("/carts",(req, res)=>{
-  let limit = parseInt(req.query.limit)
-  if(!isNaN(limit) && limit > 0){
-    return res.json(carts.slice(0, limit));
-  }
-  res.json(carts);
-})
+router.get("/", CartController.getAllCarts);
 
-router.get("/carts/:cid")
+router.get("/:cid", CartController.getCartById);
 
+router.post("/", CartController.updateCart);
+
+router.put("/:cid", CartController.updateCart);
+
+router.patch("/:cid", CartController.updateCart);
+
+router.delete("/:cid", CartController.deleteCart);
+
+export default router;
