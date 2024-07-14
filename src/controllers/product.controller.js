@@ -16,10 +16,9 @@ export const createProduct = async (req, res) => {
   const { body } = req;
 
   try {
-
-     const newProduct = await ProductService.createProduct(body);
+    const newProduct = await ProductService.createProduct(body);
     
-    res.status(201).json({ message: "Se creo exitosamente el producto." });
+    res.status(201).json({ message: "Se creo exitosamente el producto.", newProduct });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -37,7 +36,7 @@ export const getProductsById = async (req, res) => {
   try {
     const product = await ProductService.readProductById(productId);
 
-    res.status(200).json({ error: error.message });
+    res.status(200).json(product);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -55,8 +54,10 @@ export const updateProduct = async (req, res) => {
   }
 
   try {
-     const updatedProduct = await ProductService.updateProduct(productId, body);
-  }catch (error) {
+    const updatedProduct = await ProductService.updateProduct(productId, body);
+    res.status(200).json({ message: "Se actualizó exitosamente el producto.", updatedProduct });
+
+    }catch (error) {
     res.status(500).json({ error: error.message });
   }
 }
@@ -73,7 +74,7 @@ export const deleteProduct = async (req, res) => {
 
   try {
     const deletedProduct = await ProductService.deleteProduct(productId);
-    res.status(200).json({ message: "Se borro exitosamente el producto. "});
+    res.status(200).json({ message: "Se borro exitosamente el producto.", deletedProduct});
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

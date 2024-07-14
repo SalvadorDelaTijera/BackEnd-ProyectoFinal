@@ -7,7 +7,7 @@ router.get("/", CartController.getAllCarts);
 
 router.get("/:cid", CartController.getCartById);
 
-router.post("/", CartController.updateCart);
+router.post("/", CartController.createCart);
 
 router.put("/:cid", CartController.updateCart);
 

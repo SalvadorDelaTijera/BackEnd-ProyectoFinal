@@ -5,9 +5,9 @@ export default class Product {
     description, 
     code, 
     price,
-    status = true,
     stock,
     category,
+    status = true,
     thumbnails = []
   )
   {
@@ -26,7 +26,7 @@ export default class Product {
       throw new Error("Debes proporcionar un \'title' valido." );
     }
   
-    if(!object.title || object.description.length === 0){
+    if(!object.description || object.description.length === 0){
       throw new Error("Debes proporcionar un \'description' valido." );
     }
   
@@ -47,7 +47,7 @@ export default class Product {
     }
   
     if(!object.category || object.category.length === 0){
-      throw new Error("Debes proporcionar un \'category' valido." );
+      throw new Error("Debes proporcionar una \'category' valido." );
     }
 
     return new Product(

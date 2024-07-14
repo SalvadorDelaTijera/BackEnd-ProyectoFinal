@@ -10,7 +10,7 @@ items
 
   get items() {
     return this.items;
-  }
+  };
 
   set items(newItems) {
     try {
@@ -25,14 +25,14 @@ items
   addItem(newItem) {
 
     try {
-      const newCartItem = CartItem.PARAMS(newItem);
+      const newCartItem = CartItem.parse(newItem);
       const existingItemIndex = this.items.findIndex((item) => item.productId === CartItem.productId);
       
       if (existingItemIndex === -1) {
         this.items.push(newCartItem);
 
       } else {
-        this.items[existingItemIndex].quantity += newCartItem.quantity;
+        this.items[existingItemIndex].stock += newCartItem.stock;
       }
 
     } catch (error) {
@@ -54,7 +54,7 @@ items
     }
   };
 
-  opdateItem(productId, newPrice = null, newStock = null) {
+  updateItem(productId, newPrice = null, newStock = null) {
     try {
 
       if((newPrice && !isNaN(newPrice) && newPrice > 0) || (newStock && !isNaN(newStock) && newStock > 0)) {
@@ -74,7 +74,8 @@ items
       console.log(error);
       throw error;
     }
-  }
+  };
+  
     static parse(object) {
       if (!object.items || object.items.length === 0) {
         throw new Error("Un carrito sin items no es valido.");

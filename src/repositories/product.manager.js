@@ -12,6 +12,33 @@ export default class ProductManager {
     this.path = path;
   }
 
+  //------------------------------- LEER UN PRODUCTO -----------------------------------
+async loadProduct() {
+  try {
+    const reader = await readFile(this.path, { encoding: "utf-8" });
+    if (reader) {
+
+      const product = JSON.parse(reader);
+
+      this.#lastId = product?.lastId || ProductManager.#INITIAL_LAST_ID;
+      this.#products = product?.products || [];
+    } else {
+      this.#lastId = ProductManager.#INITIAL_LAST_ID;
+      this.#products = [];
+    }
+
+  } catch (error) {
+
+    if (error.code === "ENOENT") {
+      this.#lastId = ProductManager.#INITIAL_LAST_ID;
+      this.#products = [];
+    } else {
+      console.error(error);
+      throw error;
+    }
+  };
+};
+
   //------------------------------- CREAR UN PRODUCTO -----------------------------------
   async createProduct(productData) {
     try {
@@ -41,33 +68,6 @@ export default class ProductManager {
     }
   };
 
-//------------------------------- LEER UN PRODUCTO -----------------------------------
-async loadProduct() {
-  try {
-    const reader = await readFile(this.path, { encoding: "utf-8" });
-    if (reader) {
-
-      const file = JSON.parse(reader);
-
-      this.#lastId = product?.lastId || ProductManager.#INITIAL_LAST_ID;
-      this.#products = product?.products || [];
-    } else {
-      this.#lastId = ProductManager.#INITIAL_LAST_ID;
-      this.#products = [];
-    }
-
-  } catch (error) {
-
-    if (error.code === "ENOENT") {
-      this.#lastId = ProductManager.#INITIAL_LAST_ID;
-      this.#products = [];
-    } else {
-      console.error(error);
-      throw error;
-    }
-  };
-};
-
 //------------------------------- LEER TODOS LOS PRODUCTOS -----------------------------------
   async readProducts() {
     try {
@@ -87,22 +87,22 @@ async loadProduct() {
   };
 
  //------------------------------- LEER UN PRODUCTO POR ID -----------------------------------
-  async readProductById(productId) {
-    try {
-      await this.loadFile();
+  // async readProductById(productId) {
+  //   try {
+  //     await this.loadFile();
 
-      const data = this.#products.find((product) => product.i === productId);
+  //     const data = this.#products.find((product) => product.i === productId);
 
-      if (!data) {
-        throw new Error(`Bo se encontro el producto con el id ${productId}`);
-      }
-      return data;
+  //     if (!data) {
+  //       throw new Error(`Bo se encontro el producto con el id ${productId}`);
+  //     }
+  //     return data;
     
-    } catch( error) {
-      console.error(error);
-      throw error;
-    } 
-  }  
+  //   } catch( error) {
+  //     console.error(error);
+  //     throw error;
+  //   } 
+  // }  
 
 //------------------------------- GUARDAR UN PRODUCTO -----------------------------------
   async saveProduct() {
@@ -112,7 +112,7 @@ async loadProduct() {
         products: this.#products,
       };
 
-      const writter = JSON.stringify(file, null, 2);
+      const writter = JSON.stringify(product, null, 2);
 
       await writeFile(this.path, writter, { encoding: "utf-8"});
     

@@ -22,6 +22,7 @@ export const createCart = async (req, res) => {
 
   try {
     const newCart = await CartService.createCart(body);
+
     if (!newCart) {
       return res.status(400).json({ error: "No se pudo crear el carrito con los datos proporcionados."})
     }
@@ -69,7 +70,7 @@ export const updateCart = async (req, res) => {
   }
 
   try {
-    const updatedCart = await CartSerive.updateCart(cartId, body);
+    const updatedCart = await CartService.updateCart(cartId, body);
 
     if (!updateCart) {
       return res.status(404).json({ error: `No se encontró carrito con el id ${cid}.`});

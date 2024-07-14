@@ -1,4 +1,4 @@
-import { readFile, write, writeFile} from "node:fs";
+import { readFile, writeFile} from "node:fs";
 import Cart from "../models/cart.model.js"
 export default class CartManager {
   static INITIAL_LAST_ID = 0;
@@ -18,7 +18,7 @@ export default class CartManager {
         const product = JSON.parse(reader);
 
         this.#lastId = product?.lastId || CartManager.INITIAL_LAST_ID;
-        this.carts = product.carts || [];
+        this.carts = product?.carts || [];
 
       } else {
         this.#lastId = CartManager.INITIAL_LAST_ID;
@@ -40,7 +40,7 @@ export default class CartManager {
 
       const writer = JSON.stringify(product, null, 2);
 
-      await write(this.path, writer, { encoding: "utf-8" });
+      await writeFile(this.path, writer, { encoding: "utf-8" });
     
     } catch (error) {
       console.log(error);
@@ -48,16 +48,20 @@ export default class CartManager {
     };
   };
 
-  async readProducts() {
-    try {
-      await this.leadFile();
-      return this.carts;
+  // async readProducts() {
+  //   try {
+  //     await this.leadFile();
+  //     return this.carts;
 
-    }catch (error) {
-      console.error(error);
-      throw error;
-    };
-  };
+  //   }catch (error) {
+  //     if ((error.code = "ENOENT")) {
+  //       return [];
+  //     } else {
+  //       console.error(error);
+  //       throw error;
+  //     }
+  //   };
+  // };
 
   async readAllCarts() {
     try {

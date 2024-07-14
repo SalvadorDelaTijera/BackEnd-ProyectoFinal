@@ -32,6 +32,16 @@ export  const createCart = async (cartData) => {
   }
 };
 
+export const updateCart = async (cartId, cartData) => {
+  try {
+    return await cartManager.updateCart(cartId, cartData);
+  
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 export const deleteCart = async (cartId) => {
   try {
     return await cartManager.deleteCart(cartId);
@@ -39,5 +49,5 @@ export const deleteCart = async (cartId) => {
   } catch (error) {
     console.error(error);
     throw error;
-  }
-}
+  };
+};

@@ -39,7 +39,7 @@ export default class CartItem {
       throw new Error("Debe proporcionar una cantidad válida.")
     }
     this.#stock = newStock;
-  }
+  };
 
   static parse(object) {
     if(!object.productId || isNaN(object.productId) || object.productId < 1) {
