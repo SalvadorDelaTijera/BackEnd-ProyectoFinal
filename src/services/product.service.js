@@ -1,4 +1,4 @@
-import ProductManager from "../repositories/product.repository.js";
+import ProductManager from "../repositories/product.manager.js";
 
 const productManager = new ProductManager();
 
