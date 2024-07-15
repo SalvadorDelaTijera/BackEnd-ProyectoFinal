@@ -14,7 +14,7 @@ export default class Product {
     this.title = title;
     this.description = description;
     this.code = code;
-    this,price = price;
+    this.price = price;
     this.status = status;
     this.stock = stock;
     this.category = category;
@@ -34,7 +34,7 @@ export default class Product {
       throw new Error("Debes proporcionar un \'code' valido." );
     }
   
-    if(!object.price || object.price.length === 0){
+    if(!object.price || isNaN(object.price)  || object.price === 0){
       throw new Error("Debes proporcionar un \'price' valido." ); 
     }
   
@@ -42,7 +42,7 @@ export default class Product {
       throw new Error("Debes proporcionar un \'status' valido." ); 
     }
   
-    if(!object.stock || object.stock.length === 0){
+    if(!object.stock || isNaN(object.stock) || object.stock === 0){
       throw new Error("Debes proporcionar un \'stock' valido." );
     }
   

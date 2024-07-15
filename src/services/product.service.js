@@ -12,7 +12,7 @@ export const createProduct = async (data) => {
 
 export const readProducts = async () => {
   try {
-    return await productManager.readPorducts();
+    return await productManager.readProducts();
   } catch (error) {
     throw error;
   }
@@ -28,7 +28,7 @@ export const readProductById = async (productId) => {
 
 export const updateProduct = async (productId, data) => {
   try {
-    return await productManager.updateProduct(productId, data)
+    return await productManager.updateProductById(productId, data)
   }catch(error) {
     throw error;
   }
@@ -36,7 +36,7 @@ export const updateProduct = async (productId, data) => {
 
 export const deleteProduct = async (productId) => {
   try {
-    return await productManager.deleteProduct(productId);
+    return await productManager.deleteProductById(productId);
   }catch ( error) {
     throw error;
   }

@@ -38,7 +38,7 @@ export const getCartById = async (req, res) => {
   const { cid } = req.params;
   const cartId = parseint(cid);
 
-  if (isNaN(catId) || cartId < 1) {
+  if (isNaN(cartId) || cartId < 1) {
     return res.status(400).json({ error: "Debe proporcionar un id valido."});
   }
 

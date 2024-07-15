@@ -45,7 +45,7 @@ async loadProduct() {
       let retVal;
       const newProduct = Product.parse(productData)
       
-      await this.loadFile();
+      await this.loadProduct();
       const existingProduct = this.#products.find(
         (product) => product.code === newProduct.code
       );
@@ -59,7 +59,7 @@ async loadProduct() {
         retVal = newProduct;
       }
 
-      await this.saveFile();
+      await this.saveProduct();
       return retVal;
 
     }catch(error){
@@ -71,7 +71,7 @@ async loadProduct() {
 //------------------------------- LEER TODOS LOS PRODUCTOS -----------------------------------
   async readProducts() {
     try {
-      await this.loadFile();
+      await this.loadProduct();
 
       return this.#products;
 
@@ -87,22 +87,22 @@ async loadProduct() {
   };
 
  //------------------------------- LEER UN PRODUCTO POR ID -----------------------------------
-  // async readProductById(productId) {
-  //   try {
-  //     await this.loadFile();
+  async readProductById(productId) {
+    try {
+      await this.loadProduct();
 
-  //     const data = this.#products.find((product) => product.i === productId);
+      const data = this.#products.find((product) => product.id === productId);
 
-  //     if (!data) {
-  //       throw new Error(`Bo se encontro el producto con el id ${productId}`);
-  //     }
-  //     return data;
+      if (!data) {
+        throw new Error(`No se encontro el producto con el id ${productId}`);
+      }
+      return data;
     
-  //   } catch( error) {
-  //     console.error(error);
-  //     throw error;
-  //   } 
-  // }  
+    } catch( error) {
+      console.error(error);
+      throw error;
+    } 
+  }  
 
 //------------------------------- GUARDAR UN PRODUCTO -----------------------------------
   async saveProduct() {
@@ -125,7 +125,7 @@ async loadProduct() {
     async updateProductById(productId, data) {
       try {
         
-        await this.loadFile();
+        await this.loadProduct();
 
         const existingProductIndex = this.#products.findIndex(
           (product) => product.id === productId
@@ -141,7 +141,7 @@ async loadProduct() {
           id: productId,
         };
   
-        await this.saveFile();
+        await this.saveProduct();
   
         return this.#products[existingProductIndex];
 
@@ -158,7 +158,7 @@ async loadProduct() {
 //------------------------------- ELIMINAR UN PRODUCTO  -----------------------------------
   async deleteProductById(productId) {
     try {
-      await this.loadFile();
+      await this.loadProduct();
 
       const existingProductIndex = this.#products.findIndex(
         (product) => product.id === productId
@@ -173,7 +173,7 @@ async loadProduct() {
         (product) => product.id !== productId
       );
 
-      await this.saveFile();
+      await this.saveProduct();
       return retVal;
 
     } catch (error) {

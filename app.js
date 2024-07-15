@@ -1,4 +1,4 @@
-import express from "express";
+import express from "express"
 import ProductsRouter from "./src/routes/products.router.js";
 import CartsRouter from "./src/routes/carts.router.js";
 

@@ -10,15 +10,15 @@ export default class CartManager {
     this.path = path;
   }
 
-  async loadProduct () {
+  async loadFile () {
     try {
       const reader = await readFile(this.path, { encoding: "utf-8"});
     
       if (reader) {
-        const product = JSON.parse(reader);
+        const file = JSON.parse(reader);
 
-        this.#lastId = product?.lastId || CartManager.INITIAL_LAST_ID;
-        this.carts = product?.carts || [];
+        this.#lastId = file?.lastId || CartManager.INITIAL_LAST_ID;
+        this.carts = file?.carts || [];
 
       } else {
         this.#lastId = CartManager.INITIAL_LAST_ID;
@@ -31,14 +31,14 @@ export default class CartManager {
     };
   };
 
-  async saveProduct() {
+  async saveFile() {
     try {
-      const product = {
+      const file = {
         lastId: this.#lastId,
         carts: this.carts
       };
 
-      const writer = JSON.stringify(product, null, 2);
+      const writer = JSON.stringify(file, null, 2);
 
       await writeFile(this.path, writer, { encoding: "utf-8" });
     
@@ -47,21 +47,6 @@ export default class CartManager {
       throw error;
     };
   };
-
-  // async readProducts() {
-  //   try {
-  //     await this.leadFile();
-  //     return this.carts;
-
-  //   }catch (error) {
-  //     if ((error.code = "ENOENT")) {
-  //       return [];
-  //     } else {
-  //       console.error(error);
-  //       throw error;
-  //     }
-  //   };
-  // };
 
   async readAllCarts() {
     try {
