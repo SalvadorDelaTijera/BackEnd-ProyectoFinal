@@ -5,7 +5,7 @@ export default class CartItem {
   #stock;
 
 
-  constructor(productId,price,stock,) {
+  constructor(productId, price, stock = 1) {
     this.#productId = productId;
     this.#price = price;
     this.#stock = stock;

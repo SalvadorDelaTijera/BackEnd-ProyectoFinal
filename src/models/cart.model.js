@@ -26,7 +26,7 @@ items
 
     try {
       const newCartItem = CartItem.parse(newItem);
-      const existingItemIndex = this.items.findIndex((item) => item.productId === CartItem.productId);
+      const existingItemIndex = this.items.findIndex((item) => item.productId === newCartItem.productId);
       
       if (existingItemIndex === -1) {
         this.items.push(newCartItem);
