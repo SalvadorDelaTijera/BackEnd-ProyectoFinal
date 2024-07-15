@@ -40,7 +40,7 @@
       "code": "9",
       "price": 292.34,
       "status": true,
-      "stock": 1,
+      "stock": 2,
       "category": "6th generation",
       "thumbnails": [],
       "Id": 4
@@ -139,7 +139,7 @@
       "code": "n",
       "price": 470.81,
       "status": true,
-      "stock": 1,
+      "stock": 2,
       "category": "high-level",
       "thumbnails": [],
       "Id": 13
