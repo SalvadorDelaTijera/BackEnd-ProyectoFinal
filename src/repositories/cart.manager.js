@@ -94,7 +94,7 @@ export default class CartManager {
     };
   };
 
-  async apdateCart(cartId, cartData) {
+  async updateCart(cartId, cartData) {
     try {
       await this.loadFile();
 
