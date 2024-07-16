@@ -128,7 +128,7 @@ async loadProduct() {
         await this.loadProduct();
 
         const existingProductIndex = this.#products.findIndex(
-          (product) => product.Id === productId
+          (product) => product.id === productId
         );  
 
         if (existingProductIndex === -1) {

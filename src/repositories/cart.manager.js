@@ -123,7 +123,7 @@ export default class CartManager {
     try {
       await this.loadFile();
 
-      const existignCartIndex =this.cart.findIndex((cart) => cart.id === cartId);
+      const existignCartIndex =this.carts.findIndex((cart) => cart.id === cartId);
 
       if(existignCartIndex === -1) {
         throw new Error(`No se encontró el carrito con el Id ${cartId}`);
