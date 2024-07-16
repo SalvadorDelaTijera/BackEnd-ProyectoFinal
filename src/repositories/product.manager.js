@@ -161,7 +161,7 @@ async loadProduct() {
       await this.loadProduct();
 
       const existingProductIndex = this.#products.findIndex(
-        (product) => product.Id === productId
+        (product) => product.id === productId
       );
 
       if (existingProductIndex === -1) {
@@ -170,7 +170,7 @@ async loadProduct() {
 
       const retVal = this.#products[existingProductIndex];
       this.#products = this.#products.filter(
-        (product) => product.Id !== productId
+        (product) => product.id !== productId
       );
 
       await this.saveProduct();

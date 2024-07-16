@@ -57,17 +57,6 @@
       "id": 5
     },
     {
-      "title": "Handmade Concrete Pants",
-      "description": "Try to parse the TCP transmitter, maybe it will hack the open-source bus!",
-      "code": "362c4108-b9e5-4681-a179-63c02a839335",
-      "price": "573.04",
-      "status": true,
-      "stock": 1,
-      "category": "Tools",
-      "thumbnails": [],
-      "id": 6
-    },
-    {
       "title": "Incredible Soft Shoes",
       "description": "The EXE matrix is down, connect the online hard drive so we can connect the JSON circuit!",
       "code": "9df181db-1503-44bf-8a62-46a320d963bb",
@@ -111,6 +100,5 @@
       "thumbnails": [],
       "id": 10
     }
-    
   ]
 }
