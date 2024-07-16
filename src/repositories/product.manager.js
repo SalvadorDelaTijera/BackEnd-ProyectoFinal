@@ -54,7 +54,7 @@ async loadProduct() {
         existingProduct.stock += newProduct.stock;
         retVal = existingProduct;
       }else{
-        newProduct.Id = ++this.#lastId;
+        newProduct.id = ++this.#lastId;
         this.#products.push(newProduct);
         retVal = newProduct;
       }
@@ -91,7 +91,7 @@ async loadProduct() {
     try {
       await this.loadProduct();
 
-      const data = this.#products.find((product) => product.Id === productId);
+      const data = this.#products.find((product) => product.id === productId);
 
       if (!data) {
         throw new Error(`No se encontro el producto con el id ${productId}`);
