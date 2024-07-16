@@ -4,7 +4,7 @@ const productManager = new ProductManager();
 
 export const createProduct = async (data) => {
   try {
-   return await productManager.createProduct(data);
+    return await productManager.createProduct(data);
   } catch (error) {
     throw error;
   }

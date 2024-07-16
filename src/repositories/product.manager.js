@@ -5,7 +5,7 @@ export default class ProductManager {
   static #INITIAL_LAST_ID = 0;
 
   #lastId;
-  #products = []
+  #products = [];
 
   // donde se va a guardar
   constructor(path = "./src/repositories/product.json") {
@@ -91,11 +91,11 @@ async loadProduct() {
     try {
       await this.loadProduct();
 
-      const data = this.#products.find((product) => product.id === productId);
+      const data = this.#products.find((product) => product.Id === productId);
 
       if (!data) {
         throw new Error(`No se encontro el producto con el id ${productId}`);
-      }
+      }    
       return data;
     
     } catch( error) {
@@ -128,7 +128,7 @@ async loadProduct() {
         await this.loadProduct();
 
         const existingProductIndex = this.#products.findIndex(
-          (product) => product.id === productId
+          (product) => product.Id === productId
         );  
 
         if (existingProductIndex === -1) {
@@ -161,7 +161,7 @@ async loadProduct() {
       await this.loadProduct();
 
       const existingProductIndex = this.#products.findIndex(
-        (product) => product.id === productId
+        (product) => product.Id === productId
       );
 
       if (existingProductIndex === -1) {
@@ -170,7 +170,7 @@ async loadProduct() {
 
       const retVal = this.#products[existingProductIndex];
       this.#products = this.#products.filter(
-        (product) => product.id !== productId
+        (product) => product.Id !== productId
       );
 
       await this.saveProduct();
