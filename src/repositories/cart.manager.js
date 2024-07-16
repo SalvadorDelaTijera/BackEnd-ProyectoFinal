@@ -1,4 +1,4 @@
-import { readFile, writeFile} from "node:fs";
+import { readFile, writeFile} from "node:fs/promises";
 import Cart from "../models/cart.model.js"
 export default class CartManager {
   static INITIAL_LAST_ID = 0;
@@ -12,7 +12,7 @@ export default class CartManager {
 
   async loadFile () {
     try {
-      const reader = await readFile(this.path, { encoding: "utf-8"});
+      const reader = await readFile(this.path, { encoding: "utf-8" });
     
       if (reader) {
         const file = JSON.parse(reader);
