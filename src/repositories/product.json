@@ -1,5 +1,5 @@
 {
-  "lastId": 12,
+  "lastId": 22,
   "products": [
     {
       "title": "Generic Plastic Shoes",
@@ -99,6 +99,116 @@
       "category": "Beauty",
       "thumbnails": [],
       "id": 10
+    },
+    {
+      "title": "Cosa",
+      "description": "Cosa qeu es",
+      "code": "COSA",
+      "price": "100",
+      "status": true,
+      "stock": "1000",
+      "category": "COSAS",
+      "thumbnails": [],
+      "id": 13
+    },
+    {
+      "title": "Escarabajo",
+      "description": "Escarabajo Egipcio",
+      "code": "ESCA",
+      "price": 100,
+      "status": true,
+      "stock": 1000,
+      "category": "INSECTOS",
+      "thumbnails": [],
+      "id": 14
+    },
+    {
+      "title": "Iguana",
+      "description": "Iguana verde",
+      "code": "IGU",
+      "price": 200,
+      "status": true,
+      "stock": 2000,
+      "category": "REPTILES",
+      "thumbnails": [],
+      "id": 15
+    },
+    {
+      "title": "Telefono",
+      "description": "Celular Android",
+      "code": "CEL",
+      "price": 500,
+      "status": true,
+      "stock": 200,
+      "category": "CELULARES",
+      "thumbnails": [],
+      "id": 16
+    },
+    {
+      "title": "Zapato",
+      "description": "Zapato Adidas Chulo",
+      "code": "ADI0025",
+      "price": 1254.23,
+      "status": true,
+      "stock": 1000,
+      "category": "ZAPATOS",
+      "thumbnails": [],
+      "id": 17
+    },
+    {
+      "title": "Chanclas",
+      "description": "Chancla sobrepreciada",
+      "code": "CHAN0023",
+      "price": 200,
+      "status": true,
+      "stock": 2000,
+      "category": "ZAPATOS",
+      "thumbnails": [],
+      "id": 18
+    },
+    {
+      "title": "Pulsera",
+      "description": "Pulsera metálica con el Padre Nuestro",
+      "code": "PULPN01",
+      "price": 80,
+      "status": true,
+      "stock": 60,
+      "category": "ACCESORIOS",
+      "thumbnails": [],
+      "id": 19
+    },
+    {
+      "title": "La guerra y la palz",
+      "description": "Libro de puras mamadas",
+      "code": "LEV002",
+      "price": 10,
+      "status": true,
+      "stock": 152,
+      "category": "LIBROS",
+      "thumbnails": [],
+      "id": 20
+    },
+    {
+      "title": "Calcetines",
+      "description": "Calcetines usados",
+      "code": "CAL009887",
+      "price": 45,
+      "status": true,
+      "stock": 652,
+      "category": "ROPA INTERIOR",
+      "thumbnails": [],
+      "id": 21
+    },
+    {
+      "title": "Tanga",
+      "description": "Tanga rota usada",
+      "code": "TAN0069",
+      "price": 10,
+      "status": true,
+      "stock": 5421,
+      "category": "ROPA INTERIOR",
+      "thumbnails": [],
+      "id": 22
     }
   ]
 }
