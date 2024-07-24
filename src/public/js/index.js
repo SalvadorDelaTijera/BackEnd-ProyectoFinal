@@ -1,36 +1,21 @@
 const socket = io();
-const API_URL = 'http://localhost:8080/api/products/';
+const API_URL = "http://localhost:8080/api/products/";
 
-const productsContainer = document.getElementById('productsList');
+const productsContainer = document.getElementById("productsList");
 
-const btnCreateProduct = document.getElementById('createProduct');
-const txtTitle = document.getElementById('title');
-const txtDescription = document.getElementById('description');
-const txtCode = document.getElementById('code');
-const txtPrice = document.getElementById('price');
-const txtStock = document.getElementById('stock');
-const txtCategory = document.getElementById('category');
+const btnCreateProduct = document.getElementById("createProduct");
+const txtTitle = document.getElementById("title");
+const txtDescription = document.getElementById("description");
+const txtCode = document.getElementById("code");
+const txtPrice = document.getElementById("price");
+const txtStock = document.getElementById("stock");
+const txtCategory = document.getElementById("category");
 
-btnCreateProduct.addEventListener('click', async (e) => {
-  const requestBody = {
-    title: txtTitle.value.trim(),
-    description: txtDescription.value.trim(),
-    code: txtCode.value.trim(),
-    price: Number.parseFloat(txtPrice.value),
-    stock: Number.parseFloat(txtStock.value),
-    category: txtCategory.value.trim(),
-    status: true,
-  };
-
-  socket.emit('nuevoProducto', { body: requestBody });
-});
-
-const handleDeleteProduct = async (productId) => {};
-
-socket.on('updateProductsList', (data) => {
-  const { products } = data;
-
-  productsContainer.innerHTML = "";
+// reutilizable para lista de productos
+function updateProductsList(products) {
+  //products----productos que deben mostrarse
+  //containerId--- ID edl elementohtml la lista de productos
+  productsContainer.innerHTML = ""; // para limpiar el form
 
   products.forEach((product) => {
     const divIndividual = document.createElement("div");
@@ -67,7 +52,30 @@ socket.on('updateProductsList', (data) => {
     formularioIndividual.appendChild(pCategoria);
 
     divIndividual.appendChild(formularioIndividual);
-
     productsContainer.appendChild(divIndividual);
   });
+}
+
+btnCreateProduct.addEventListener("click", async (e) => {
+  const requestBody = {
+    title: txtTitle.value.trim(),
+    description: txtDescription.value.trim(),
+    code: txtCode.value.trim(),
+    price: Number.parseFloat(txtPrice.value),
+    stock: Number.parseFloat(txtStock.value),
+    category: txtCategory.value.trim(),
+    status: true,
+  };
+
+  socket.emit("nuevoProducto", { body: requestBody });
+});
+
+const handleDeleteProduct = async (productId) => {
+  socket.emit('borraProducto', { productId });
+};
+
+socket.on("updateProductsList", (data) => {
+  const { products } = data;
+
+  updateProductsList(products);
 });

@@ -1,6 +1,6 @@
 import app from "./app.js";
 import { Server } from "socket.io";
-import { createProduct, readProducts } from "./src/services/product.service.js";
+import { createProduct, deleteProduct, readProducts } from "./src/services/product.service.js";
 
 const PORT= 8080;
 
@@ -32,5 +32,17 @@ socketServer.on('connection', (socket) => {
     }
   });
 
-  socket.on('borraProducto', (data) => {})
+  socket.on('borraProducto', async (data) => {
+    const { productId } = data;
+
+    try {
+      await deleteProduct(productId);
+
+      const todosLosProductos = await readProducts();
+      socketServer.emit("updateProductsList", { products: todosLosProductos });
+    } catch (error) {
+      console.error(error);
+    }
+  });
 });
+

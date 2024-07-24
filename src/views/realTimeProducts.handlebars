@@ -50,7 +50,7 @@
               <p>Precio: {{this.price}}</p>
               <p>Existencias: {{this.stock}}</p>
               <p>Categorìa: {{this.category}}</p>
-              <button id="deleteProduct">Eliminar</button>
+              <button id="deleteProduct_{{this.id}}" onclick="handleDeleteProduct({{this.id}})">Eliminar</button>
             </form>
           </div>
           <br>
