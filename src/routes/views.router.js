@@ -8,10 +8,16 @@ router.get('/', async (req, res) =>{
   const products = await readProducts();
   res.render('home', {
     products,
-    productsCount: products.length > 0 ? products.length : undefined,
+    productsCount: products.length ?? undefined,
   });
 });
 
-
+router.get("/realtimeproducts", async (req, res) => {
+  const products = await readProducts();
+  res.render('realTimeProducts', {
+    products,
+    productsCount: products.length ?? undefined,
+  });
+});
 
  export default router;
