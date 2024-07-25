@@ -51,6 +51,15 @@ function updateProductsList(products) {
     pCategoria.innerHTML = `Categoría: ${product.category}`;
     formularioIndividual.appendChild(pCategoria);
 
+    //BOTON PARA ELIMINAR
+
+    const botonEliminar = document.createElement("button");
+    botonEliminar.setAttribute("id", `deleteProduct_${product.id}`);
+    botonEliminar.setAttribute("onclick", `handleDeleteProduct(${product.id})`);
+    botonEliminar.innerHTML = "Eliminar";
+
+    formularioIndividual.appendChild(botonEliminar);
+  
     divIndividual.appendChild(formularioIndividual);
     productsContainer.appendChild(divIndividual);
   });
