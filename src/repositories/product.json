@@ -1,61 +1,6 @@
 {
-  "lastId": 23,
+  "lastId": 24,
   "products": [
-    {
-      "title": "Handcrafted Wooden Mouse",
-      "description": "Use the primary SSL interface, then you can hack the mobile alarm!",
-      "code": "03bf1dca-4a7b-4c94-9400-f6c67b33e969",
-      "price": "666.36",
-      "status": true,
-      "stock": 1,
-      "category": "Tools",
-      "thumbnails": [],
-      "id": 3
-    },
-    {
-      "title": "Handcrafted Steel Sausages",
-      "description": "Try to back up the GB microchip, maybe it will generate the 1080p interface!",
-      "code": "233ae58c-f8f4-4b53-87ea-1468b9e2890a",
-      "price": "999.82",
-      "status": true,
-      "stock": 1,
-      "category": "Toys",
-      "thumbnails": [],
-      "id": 4
-    },
-    {
-      "title": "Incredible Soft Shoes",
-      "description": "The EXE matrix is down, connect the online hard drive so we can connect the JSON circuit!",
-      "code": "9df181db-1503-44bf-8a62-46a320d963bb",
-      "price": "76.43",
-      "status": true,
-      "stock": 1,
-      "category": "Industrial",
-      "thumbnails": [],
-      "id": 7
-    },
-    {
-      "title": "Ergonomic Wooden Mouse",
-      "description": "If we override the monitor, we can get to the GB sensor through the open-source SSL program!",
-      "code": "bdb00a99-0864-4212-b849-455150a3d34d",
-      "price": "562.77",
-      "status": true,
-      "stock": 1,
-      "category": "Health",
-      "thumbnails": [],
-      "id": 8
-    },
-    {
-      "title": "Small Fresh Bacon",
-      "description": "We need to input the open-source GB port!",
-      "code": "5fbfc395-e794-4295-8144-5e35378a9b7a",
-      "price": "222.55",
-      "status": true,
-      "stock": 1,
-      "category": "Beauty",
-      "thumbnails": [],
-      "id": 10
-    },
     {
       "title": "Cosa",
       "description": "Cosa qeu es",
@@ -176,6 +121,17 @@
       "category": "elementos suicidas",
       "thumbnails": [],
       "id": 23
+    },
+    {
+      "title": "POPSTART",
+      "description": "Muñeco de peluche",
+      "code": "POP45667",
+      "price": 1234,
+      "status": true,
+      "stock": 5576,
+      "category": "Juguetes",
+      "thumbnails": [],
+      "id": 24
     }
   ]
 }
