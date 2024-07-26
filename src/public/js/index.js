@@ -66,13 +66,27 @@ function updateProductsList(products) {
 }
 
 btnCreateProduct.addEventListener("click", async (e) => {
+
+  const title = txtTitle.value.trim();
+  const description = txtDescription.value.trim();
+  const code = txtCode.value.trim();
+  const price = Number.parseFloat(txtPrice.value);
+  const stock = Number.parseFloat(txtStock.value);
+  const category = txtCategory.value.trim();
+
+  if (!title || !description || !code || isNaN(price) || isNaN(stock) || !category){
+
+    alert ("Debes llenar todos los campos correctamente");
+    return;
+  }
+
   const requestBody = {
-    title: txtTitle.value.trim(),
-    description: txtDescription.value.trim(),
-    code: txtCode.value.trim(),
-    price: Number.parseFloat(txtPrice.value),
-    stock: Number.parseFloat(txtStock.value),
-    category: txtCategory.value.trim(),
+    title,
+    description,
+    code,
+    price,
+    stock,
+    category,
     status: true,
   };
 

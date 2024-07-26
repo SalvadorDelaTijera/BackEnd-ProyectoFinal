@@ -1,5 +1,5 @@
 {
-  "lastId": 24,
+  "lastId": 25,
   "products": [
     {
       "title": "Cosa",
@@ -132,6 +132,17 @@
       "category": "Juguetes",
       "thumbnails": [],
       "id": 24
+    },
+    {
+      "title": "Pastel",
+      "description": "Pastel de coco con chocolate",
+      "code": "PAST234567",
+      "price": 5600,
+      "status": true,
+      "stock": 556,
+      "category": "PASTELERIA",
+      "thumbnails": [],
+      "id": 25
     }
   ]
 }
