@@ -1,0 +1,67 @@
+<div>
+  <h1> Agregar Productos </h1>
+  <div>
+    <h4>Formualrio</h4>
+    <form>
+      <div>
+        <label for="title">Titulo:</label>
+        <input type="text" id="title">
+      </div>
+      <div>
+        <label for="description">Descripciòn:</label>
+        <input type="text" id="description">
+      </div>
+      <div>
+        <label for="code">Còdigo:</label>
+        <input type="text"  id="code">
+      </div>
+      <div>
+        <label for="price">Precio: </label>
+        <input type="number" id="price">
+      </div>
+      <div>
+        <label for="stock">Existencias:</label>
+        <input type="number" id="stock">
+      </div>
+      <div>
+        <label for="category">Categorìa:</label>
+        <input type="text" id="category">
+      </div>
+      <br>
+      <div>
+        <button id="createProduct">Crear</button>
+      </div>
+    </form>
+  </div>
+  <br>
+  <hr>
+  
+  <div>
+    <h4>Lista de Productos</h4>
+      {{#if productsCount}}
+      <div id="productsList">
+        {{#each products}}
+          <div>
+            <form>
+              <input type="hidden" name="productId_{{this.id}}" value="{{this.id}}" />
+              <p>Titulo: {{this.title}}</p>
+              <p>Descripciòn: {{this.description}}</p>
+              <p>Còdigo: {{this.code}}</p>
+              <p>Precio: {{this.price}}</p>
+              <p>Existencias: {{this.stock}}</p>
+              <p>Categorìa: {{this.category}}</p>
+              <button id="deleteProduct_{{this.id}}" onclick="handleDeleteProduct({{this.id}})">Eliminar</button>
+            </form>
+          </div>
+          <br>
+          <hr>
+          <br>
+        {{/each}}
+      </div>
+    {{/if}}
+  </div>
+</div>
+<br>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/index.js"></script>
