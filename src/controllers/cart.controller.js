@@ -1,14 +1,21 @@
-import * as CartService from "../services/cart.service.js"
+import * as CartService from "../services/cart.mongodb.service.js";
+import { validatePage, validatePageSize } from "../utils/query.params.validator.js";
+import { buildQuery } from "../utils/mongodb.query.builder.js";
 
 // -------------- GET TODOS -----------------------
 export const getAllCarts = async (req, res) => {
+  const { page, limit, query } = req.query;
+
+  const validPage = validatePage(page);
+  const validPageSize = validatePageSize(limit);
+  const filter = buildQuery(query);
 
   try {
-    const carts = await CartService.getAllCarts();
-    res.status(200).json({ carts});
+    const carts = await CartService.readMany(validPage, validPageSize, filter);
+    res.status(200).json({ carts });
 
   }catch (error) {
-    res.status(500).json({ error: error.message});
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -21,7 +28,7 @@ export const createCart = async (req, res) => {
   }
 
   try {
-    const newCart = await CartService.createCart(body);
+    const newCart = await CartService.create(body);
 
     if (!newCart) {
       return res.status(400).json({ error: "No se pudo crear el carrito con los datos proporcionados."})
@@ -36,14 +43,9 @@ export const createCart = async (req, res) => {
 // -------------- GET POR ID -----------------------
 export const getCartById = async (req, res) => {
   const { cid } = req.params;
-  const cartId = parseint(cid);
-
-  if (isNaN(cartId) || cartId < 1) {
-    return res.status(400).json({ error: "Debe proporcionar un id valido."});
-  }
 
   try {
-    const cart = await CartService.getCartById(cartId);
+    const cart = await CartService.readById(cid);
     if (!cart) {
       return res.status(404).json({ error: `No se encontro carrito con el id ${cid}`});
     }
@@ -58,26 +60,20 @@ export const getCartById = async (req, res) => {
 export const updateCart = async (req, res) => {
   const { cid } = req.params;
   const { body } = req;
-  
-  const cartId = parseInt(cid);
-
-  if (isNaN(cartId) || cartId <1) {
-    return res.status(400).json({ error: "Debe proporcionar un id válido de carrito." });
-  }
 
   if (!body) {
     return res.status(400).json({ error: "Debe proporcionar los datos para actualizar el carrito." });
   }
 
   try {
-    const updatedCart = await CartService.updateCart(cartId, body);
+    const updatedCart = await CartService.update(cid, body);
 
     if (!updateCart) {
       return res.status(404).json({ error: `No se encontró carrito con el id ${cid}.`});
     }
-    res.status(200).json({ message: "Se actualizó exitosamente el carrito.", updatedCart });
 
-  }catch(error) {
+    res.status(200).json({ message: "Se actualizó exitosamente el carrito.", updatedCart });
+  } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
@@ -86,14 +82,12 @@ export const updateCart = async (req, res) => {
 export const deleteCart = async (req, res) => {
   const { cid } = req.params;
   
-  const cartId = parseInt(cid);
-
   if (isNaN(cartId) || cartId <1) {
     return res.status(400).json({ error: "Debe proporcionar un id válido de carrito."});
   }
 
   try {
-    const deletedCart = await CartService.deleteCart(cartId);
+    const deletedCart = await CartService.remove(cid);
 
     if (!deleteCart) {
       return res.status(400).json({ error: `No se encontró carrito con el id ${cid}.` });
