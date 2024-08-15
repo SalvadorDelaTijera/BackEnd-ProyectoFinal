@@ -12,9 +12,9 @@ export const getAllCarts = async (req, res) => {
 
   try {
     const carts = await CartService.readMany(validPage, validPageSize, filter);
-    res.status(200).json({ carts });
 
-  }catch (error) {
+    res.status(200).json({ carts });
+  } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
@@ -33,9 +33,9 @@ export const createCart = async (req, res) => {
     if (!newCart) {
       return res.status(400).json({ error: "No se pudo crear el carrito con los datos proporcionados."})
     }
+
     res.status(201).json({ message: "Se creó exitosamente el carrito.", newCart });
-  
-  }catch (error) {
+  } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
@@ -49,9 +49,9 @@ export const getCartById = async (req, res) => {
     if (!cart) {
       return res.status(404).json({ error: `No se encontro carrito con el id ${cid}`});
     }
-    res.status(200).json({ cart });
 
-  }catch (error) {
+    res.status(200).json({ cart });
+  } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
@@ -92,8 +92,8 @@ export const deleteCart = async (req, res) => {
     if (!deleteCart) {
       return res.status(400).json({ error: `No se encontró carrito con el id ${cid}.` });
     }
-    res.status(200).json({ message: "Se borró exitosamente el carrito.", deletedCart });
 
+    res.status(200).json({ message: "Se borró exitosamente el carrito.", deletedCart });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

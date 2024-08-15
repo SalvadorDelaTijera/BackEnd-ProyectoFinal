@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { paginate } from "mongoose-paginate-v2";
+import paginate from "mongoose-paginate-v2";
 import MongooseDelete from "mongoose-delete";
 
 export const CartItemSchema = new Schema({
@@ -31,7 +31,11 @@ export const CartItemSchema = new Schema({
 });
 
 export const CartSchema = new Schema({
-  items: [CartItemSchema],
+  items: {
+    type: [CartItemSchema],
+    required: false,
+    default: [],
+  },
 }, {
   timestamps: true,
   virtuals: {

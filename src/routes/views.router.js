@@ -1,11 +1,11 @@
 import express from "express";
-import { readProducts } from "../services/product.service.js";
+import { readMany } from "../services/product.mongodb.service.js";
 
 const router = express.Router();
 
 //PARA RENDERIZAR/ debe estar en routes
 router.get('/', async (req, res) =>{
-  const products = await readProducts();
+  const products = await readMany();
   res.render('home', {
     products,
     productsCount: products.length ?? undefined,
@@ -13,11 +13,12 @@ router.get('/', async (req, res) =>{
 });
 
 router.get("/realtimeproducts", async (req, res) => {
-  const products = await readProducts();
+  const products = await readMany();
   res.render('realTimeProducts', {
     products,
-    productsCount: products.length ?? undefined,
+    productsCount: products?.totalDocs ?? 0,
   });
 });
 
  export default router;
+ 

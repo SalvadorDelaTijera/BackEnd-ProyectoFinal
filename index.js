@@ -1,8 +1,8 @@
 import app from "./app.js";
 import { Server } from "socket.io";
-import { createProduct, deleteProduct, readProducts } from "./src/services/product.service.js";
+import { create, remove, readMany } from "./src/services/product.mongodb.service.js";
 
-const PORT= 8080;
+const PORT = 8080;
 
 const httpServer = app.listen(PORT, (err) => {
   if (err) {
@@ -21,10 +21,10 @@ socketServer.on('connection', (socket) => {
     const { body } = data;
 
     try {
-      const nuevoProducto = createProduct(body);
+      const nuevoProducto = create(body);
 
       if (nuevoProducto) {
-        const todosLosProductos = await readProducts();
+        const todosLosProductos = await readMany();
         socketServer.emit("updateProductsList", { products: todosLosProductos });
       }
     } catch (error) {
@@ -36,9 +36,9 @@ socketServer.on('connection', (socket) => {
     const { productId } = data;
 
     try {
-      await deleteProduct(productId);
+      await remove(productId);
 
-      const todosLosProductos = await readProducts();
+      const todosLosProductos = await readMany();
       socketServer.emit("updateProductsList", { products: todosLosProductos });
     } catch (error) {
       console.error(error);

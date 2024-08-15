@@ -1,5 +1,5 @@
 {
-  "lastId": 25,
+  "lastId": 26,
   "products": [
     {
       "title": "Cosa",
@@ -143,6 +143,17 @@
       "category": "PASTELERIA",
       "thumbnails": [],
       "id": 25
+    },
+    {
+      "title": "Tela de Juir",
+      "description": "Suave tela de masa cuata tejida",
+      "code": "TDJ1001",
+      "price": 90,
+      "status": true,
+      "stock": 8000,
+      "category": "TELASPONCHO",
+      "thumbnails": [],
+      "id": 26
     }
   ]
 }

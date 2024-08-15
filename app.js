@@ -1,4 +1,6 @@
-import express from "express"
+import express from "express";
+import mongoose from "mongoose";
+import "dotenv/config";
 import ProductsRouter from "./src/routes/products.router.js";
 import CartsRouter from "./src/routes/carts.router.js";
 
@@ -17,6 +19,15 @@ app.use(express.urlencoded({extended: true}));
 app.use("/api/products", ProductsRouter);
 app.use("/api/carts", CartsRouter);
 
+//-----------CONEXION MONGODB------------------------
+try {
+  await mongoose.connect(process.env.MONGODB_CONNECTION_STRING);
+
+  console.info("🍃 conectado exitosamente a MongoDB!");
+} catch (error) {
+  console.error(`😓 error de conexión a MongoDB:\n${error.message}`);
+}
+
 
 //-----------RUTAS HANDLEBAR------------------------
 
@@ -32,8 +43,5 @@ app.use(express.static(__dirname + '/public'));
 
 //RUOTER VIEWS
 app.use("/", viewsRouter);
-
-
-
 
 export default app;
