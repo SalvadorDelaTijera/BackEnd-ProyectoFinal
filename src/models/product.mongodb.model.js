@@ -1,6 +1,5 @@
 import { Schema, model } from "mongoose";
 import paginate from "mongoose-paginate-v2";
-import MongooseDelete from "mongoose-delete";
 
 export const ProductSchema = new Schema({
   title: {
@@ -49,10 +48,6 @@ export const ProductSchema = new Schema({
 });
 
 ProductSchema.plugin(paginate);
-
-ProductSchema.plugin(MongooseDelete, {
-  indexFields: ['deleted', 'deletedAt'],
-});
 
 const Product = model('Product', ProductSchema);
 

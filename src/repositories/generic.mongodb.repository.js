@@ -1,4 +1,5 @@
 import { Model, Schema } from "mongoose";
+import { CUSTOM_LABELS } from "../constants/mongodb.default.paginated.options.js";
 
 /**
  * Implementa un patrón Factory con los modelos de Mongoose.
@@ -33,9 +34,7 @@ export default class GenericMongoDBRepository {
       throw new Error(
         `GenericRepository.create error called with params { data: ${
           data
-        }}: \n${
-          error.message
-        }`
+        } }`, { cause: error }
       );
     }
   }
@@ -82,7 +81,7 @@ export default class GenericMongoDBRepository {
     }
 
     try {
-      return await this.model.paginate(query, { page, limit: pageSize, sort });
+      return await this.model.paginate(query, { page, limit: pageSize, customLabels: CUSTOM_LABELS, sort });
     } catch (error) {
       throw new Error(
         `GenericRepository.getMany error called with params { page: ${
@@ -91,9 +90,7 @@ export default class GenericMongoDBRepository {
           pageSize
         }, query: ${
           query
-        } }:\n${
-          error.message
-        }`
+        } }`, { cause: error }
       );
     }
   }

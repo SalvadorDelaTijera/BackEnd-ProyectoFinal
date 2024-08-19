@@ -1,6 +1,7 @@
 import * as ProductService from "../services/product.mongodb.service.js";
 import { validatePage, validatePageSize, validateSorting } from "../utils/query.params.validator.js";
 import { buildQuery } from "../utils/mongodb.query.builder.js";
+import pageLinksBuilder from "../utils/page.links.builder.js";
 
 // -------------- GET TODOS -----------------------
 export const getProducts = async (req, res) => {
@@ -12,9 +13,28 @@ export const getProducts = async (req, res) => {
   const filter = buildQuery(query);
 
   try {
-    const products = await ProductService.readMany(validPage, validPageSize, filter, validSort);
+    const result = await ProductService.readMany(validPage, validPageSize, filter, validSort);
 
-    res.status(200).json(products);
+    if (!result) {
+      return res.status(404).json({
+        status: "error",
+        error: "No se encontraron productos en la Base de Datos.",
+      });
+    }
+
+    const { prevLink, nextLink } = pageLinksBuilder(
+      req.baseUrl,
+      req.query,
+      result.prevPage,
+      result.nextPage
+    );
+
+    res.status(200).json({
+      status: "success",
+      ...result,
+      prevLink,
+      nextLink,
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

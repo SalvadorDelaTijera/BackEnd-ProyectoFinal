@@ -20,13 +20,17 @@ app.use("/api/products", ProductsRouter);
 app.use("/api/carts", CartsRouter);
 
 //-----------CONEXION MONGODB------------------------
-try {
-  await mongoose.connect(process.env.MONGODB_CONNECTION_STRING);
-
-  console.info("🍃 conectado exitosamente a MongoDB!");
-} catch (error) {
-  console.error(`😓 error de conexión a MongoDB:\n${error.message}`);
+const environment = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_CONNECTION_STRING);
+  
+    console.info("🍃 conectado exitosamente a MongoDB!");
+  } catch (error) {
+    console.error(`😓 error de conexión a MongoDB:\n${error.message}`);
+  }
 }
+
+environment();
 
 
 //-----------RUTAS HANDLEBAR------------------------
