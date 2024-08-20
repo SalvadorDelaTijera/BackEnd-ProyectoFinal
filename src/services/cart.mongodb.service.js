@@ -1,4 +1,3 @@
-import { Schema } from "mongoose";
 import GenericMongoDBRepository from "../repositories/generic.mongodb.repository.js";
 import Cart from "../models/cart.mongodb.model.js";
 
@@ -42,20 +41,9 @@ export const readById = async (id) => {
 
 export const update = async (id, data) => {
   try {
-    const existingCart = await cartRepository.getOneById(id);
+    const updatedCart = await cartRepository.update(id, data);
 
-    if (!existingCart) {
-      throw new Error(
-        'CartService.update Error:',
-        `Cart with ID ${id} not found.`
-      );
-    }
-
-    existingCart.items = items.forEach((item) => item.productId = Schema.ObjectId.cast(item.productId));
-
-    await existingCart.save();
-
-    return existingCart;
+    return updatedCart;
   } catch (error) {
     throw new Error(
       `CartService.update error called with params { id: '${

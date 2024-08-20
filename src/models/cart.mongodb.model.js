@@ -3,7 +3,7 @@ import paginate from "mongoose-paginate-v2";
 
 export const CartItemSchema = new Schema({
   productId: {
-    type: Schema.Types.UUID,
+    type: Schema.Types.ObjectId,
     ref: 'Product',
     required: true,
     index: true,

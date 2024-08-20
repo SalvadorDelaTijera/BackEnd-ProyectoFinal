@@ -130,14 +130,15 @@ export default class GenericMongoDBRepository {
    * 
    * @param {Schema.Types.ObjectId | string} id el id del documento a
    * actualizar.
-   * @param {JSON} data un objeto JSON con los pares de llave-valor a
-   * actualizar en el documento.
+   * @param {JSON | JSON[]} data un objeto, o un arreglo de objetos JSON,
+   * cada uno con los pares de llave-valor a actualizar en el documento.
    * @returns un documento con los valores actualizados.
    */
   async update(id, data) {
     try {
           return await this.model.findByIdAndUpdate(id, data, { new: true });
     } catch (error) {
+      console.error(error);
       throw new Error(
         `GenericMongooseRepository.update error called with params { id: ${
           id
