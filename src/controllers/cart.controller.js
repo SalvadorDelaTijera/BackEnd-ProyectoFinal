@@ -1,7 +1,7 @@
 import * as CartService from "../services/cart.mongodb.service.js";
 import { validatePage, validatePageSize } from "../utils/query.params.validator.js";
 import { buildQuery } from "../utils/mongodb.query.builder.js";
-import pageLinksBuilder from "../utils/page.links.builder.js";
+import { buildPageLinks } from "../utils/page.links.builder.js";
 
 // -------------- GET TODOS -----------------------
 export const getAllCarts = async (req, res) => {
@@ -21,7 +21,7 @@ export const getAllCarts = async (req, res) => {
       })
     }
 
-    const { prevLink, nextLink } = pageLinksBuilder(
+    const { prevLink, nextLink } = buildPageLinks(
       req.baseUrl,
       req.query,
       result.prevPage,

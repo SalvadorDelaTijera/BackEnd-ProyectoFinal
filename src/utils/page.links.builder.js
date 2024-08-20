@@ -14,7 +14,7 @@
  * previa, y `nextLink` (`string` o `null`) que apunta a la página siguiente
  * de resultados.
  */
-export default function pageLinksBuilder(baseUrl, query, prevPage = null, nextPage = null) {
+export function buildPageLinks(baseUrl, query, prevPage = null, nextPage = null) {
   let prevLinkString = prevPage === null ? null : baseUrl ?? "/";
   let nextLinkString = nextPage === null ? null : baseUrl ?? "/";
 

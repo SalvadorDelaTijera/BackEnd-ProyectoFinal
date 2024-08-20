@@ -1,7 +1,7 @@
 import * as ProductService from "../services/product.mongodb.service.js";
 import { validatePage, validatePageSize, validateSorting } from "../utils/query.params.validator.js";
 import { buildQuery } from "../utils/mongodb.query.builder.js";
-import pageLinksBuilder from "../utils/page.links.builder.js";
+import { buildPageLinks } from "../utils/page.links.builder.js";
 
 // -------------- GET TODOS -----------------------
 export const getProducts = async (req, res) => {
@@ -22,7 +22,7 @@ export const getProducts = async (req, res) => {
       });
     }
 
-    const { prevLink, nextLink } = pageLinksBuilder(
+    const { prevLink, nextLink } = buildPageLinks(
       req.baseUrl,
       req.query,
       result.prevPage,
