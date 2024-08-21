@@ -54,6 +54,8 @@ export default class GenericMongoDBRepository {
    * @param {JSON} sort un objeto JSON que define el orden en
    * que se presentarán los documentos de la Base de Datos. Por lo pronto
    * sólo es aplicable a la colección `Producto`.
+   * @param {Array | JSON | string} populate ruta(s) que deben ser
+   * populadas con documentos de otras colecciones.
    * @returns un arreglo de documentos que cumplen con los parámetros
    * solicitados o, un arreglo vacío si no se encuentran documentos con
    * los parámetros solicitados.
@@ -63,6 +65,7 @@ export default class GenericMongoDBRepository {
     pageSize = GenericMongoDBRepository.DEFAULT_PAGE_SIZE_VALUE,
     query = {},
     sort = {},
+    populate = undefined,
   ) {
     if (page < GenericMongoDBRepository.MIN_PAGE_VALUE) {
       throw new Error(
@@ -81,7 +84,16 @@ export default class GenericMongoDBRepository {
     }
 
     try {
-      return await this.model.paginate(query, { page, limit: pageSize, customLabels: CUSTOM_LABELS, sort });
+      return await this.model.paginate(
+        query,
+        {
+          page,
+          limit: pageSize,
+          customLabels: CUSTOM_LABELS,
+          sort,
+          populate,
+        }
+      );
     } catch (error) {
       throw new Error(
         `GenericRepository.getMany error called with params { page: ${

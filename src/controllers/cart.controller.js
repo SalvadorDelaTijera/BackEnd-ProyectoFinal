@@ -64,10 +64,16 @@ export const getCartById = async (req, res) => {
   try {
     const cart = await CartService.readById(cid);
     if (!cart) {
-      return res.status(404).json({ error: `No se encontro carrito con el id ${cid}`});
+      return res.status(404).json({
+        status: "error",
+        error: `No se encontro carrito con el id ${cid}`
+      });
     }
 
-    res.status(200).json({ cart });
+    res.status(200).json({
+      status: "success",
+      payload: cart
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -89,10 +95,16 @@ export const updateCart = async (req, res) => {
     const updatedCart = await CartService.update(cid, body);
 
     if (!updateCart) {
-      return res.status(404).json({ error: `No se encontró carrito con el id ${cid}.`});
+      return res.status(404).json({
+        status: "error",
+        error: `No se encontró carrito con el id ${cid}.`
+      });
     }
 
-    res.status(200).json({ message: "Se actualizó exitosamente el carrito.", updatedCart });
+    res.status(200).json({
+      status: "success",
+      payload: updatedCart
+    });
   } catch (error) {
     res.status(500).json({
       status: "error",
@@ -131,6 +143,19 @@ export const updateProductInCart = async (req, res) => {
   }
 
   try {
+    const result = await CartService.updateCartItem(cid, pid, newQuantity);
+
+    if (!result) {
+      return res.status(404).json({
+        status: "error",
+        error: `No se encontró carrito con ID '${cid}'.`
+      });
+    }
+
+    res.status(200).json({
+      status: "success",
+      payload: result,
+    });
   } catch (error) {
     return res
       .status(500)

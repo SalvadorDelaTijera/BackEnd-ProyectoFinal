@@ -13,7 +13,7 @@ export const create = async () => {
 
 export const readMany = async (page, pageSize, query) => {
   try {
-    return await cartRepository.getMany(page, pageSize, query);
+    return await cartRepository.getMany(page, pageSize, query, {}, 'items.productId');
   } catch (error) {
     throw new Error(
       `CartService.readMany error called with params { page: ${
@@ -66,16 +66,12 @@ export const updateCartItem = async (cartId, productId, newQuantity) => {
       );
     }
 
-    const productToUpdate = existingCart.items.find((item) => item.id === productId);
-
-    if (!productToUpdate) {
-      throw new Error(
-        'CartService.updateCartItem Error:',
-        `Product with ID '${productId}' was not found.`
-      );
+    for (let i = 0; i < existingCart.items.length; i++) {
+      if (existingCart.items[i].productId.toString() === productId) {
+        existingCart.items[i].quantity = newQuantity;
+        break;
+      }
     }
-
-    productToUpdate.quantity = newQuantity;
 
     await existingCart.save();
 
@@ -88,7 +84,7 @@ export const updateCartItem = async (cartId, productId, newQuantity) => {
         productId
       }', newQuantity: ${
         newQuantity
-      } }`, { cause: error }
+      } }:\n${error}`, { cause: error }
     );
   }
 };
@@ -109,17 +105,16 @@ export const removeProductFromCart = async (cartId, productId) => {
 
     if (!existingCart) {
       throw new Error(
-        `CartService.removeProductFromCart error called with params { cartId: '${
-          cartId
-        }', productId: '${
-          productId
-        }' }\nCart with ID ${cartId} was not found.`
+        'CartService.updateCartItem Error:',
+        `Cart with ID '${cartId}' was not found.`
       );
     }
 
-    existingCart.items = existingCart.items.filter((item) => item.id !== productId);
+    const filteredItems = existingCart.items.filter((item) => item.productId.toString() !== productId);
 
-    await existingCart.save();
+    existingCart.items = filteredItems;
+
+    existingCart.save();
 
     return existingCart;
   } catch (error) {
